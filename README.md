@@ -43,7 +43,7 @@ pip install torch torchvision matplotlib tqdm
 
 ---
 
-## 🧪 分步测试（强烈建议先跑）
+## 🧪 分步测试
 
 不用一口气跑通全部，每一步都能单独验证：
 
