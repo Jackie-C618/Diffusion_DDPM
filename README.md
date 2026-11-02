@@ -115,10 +115,10 @@ loss = MSE( ε ,  ε_θ(x_t, t) )
 
 ## ⭐ 排错清单
 
-- **形状对不上** → 90% 是 `gather` 后 `reshape` 漏了 `(B,1,1,1)`，或上/下采样通道没对齐。
-- **loss 是 NaN** → 查归一化值域、`LR`、`posterior_variance` 是否出负数。
-- **生成全是灰/噪** → 训练不够，或时间嵌入没接好（网络看不到 t 就学不出去噪）。
-- **显存爆** → 减小 `BATCH_SIZE` / `BASE_CHANNELS`，MNIST 先别纠结 GPU。
+- **形状对不上** →  `gather` 或 `reshape` 的问题。
+- **loss 是 NaN** → `LR`、`posterior_variance` 是否出现负数。
+- **生成全是灰/噪** → 训练不够，或时间嵌入没接好（网络未收到 t 就无法学习去噪）。
+- **显存问题** → 减小 `BATCH_SIZE` / `BASE_CHANNELS`。
 
 ---
 
