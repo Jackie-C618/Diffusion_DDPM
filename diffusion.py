@@ -14,7 +14,8 @@ from config import T, DEVICE
 from schedule import make_schedule
 
 def q_sample(x0, t, noise, sched=None):
-    """给定原图 x0 和步数 t，一步加噪得到 x_t。
+    """
+    给定原图 x0 和步数 t，一步加噪得到 x_t（t最大999，每个batch128个，每个样本t不同，循环不可行）
 
     x0, noise : (B, C, H, W)
     t         : (B,) 整数，每个样本可以不同步数
@@ -43,9 +44,9 @@ def plot_noising(x0, sched=None, save_path="noising.png", steps=(0, 250, 500, 75
     """画图：同一张图在不同 t 下的加噪过程（保存 noising.png）。
 
     ❖ 这张图反映什么：
-       直观验证"加噪公式实现正确"。t=0 应几乎就是原图，随 t 增大逐渐
-       变成纯高斯噪声。如果 t=0 就已经糊了，说明 sqrt_alpha_bars 的
-       gather/reshape 写错了——这是新手最常见的坑。
+       直观验证"加噪公式实现正确"。
+       t=0 应几乎就是原图，随 t 增大逐渐变成纯高斯噪声。
+       如果 t=0 就已经糊了，说明 sqrt_alpha_bars 的 gather/reshape 错了
     """
     import matplotlib.pyplot as plt
     if sched is None:
@@ -114,6 +115,6 @@ def plot_sampling_trajectory(traj, save_path="sampling_traj.png"):
 
 if __name__ == "__main__":
     test_q_sample()
-    # 用一张随机图演示加噪过程（真实训练时用数据集里的图更有意义）
+    # 使用一张随机图演示加噪过程（真实训练时用数据集里的图更有意义）
     demo = torch.randn(1, 1, 28, 28)
     plot_noising(demo)

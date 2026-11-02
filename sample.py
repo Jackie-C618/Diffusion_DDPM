@@ -1,4 +1,5 @@
-"""sample.py — 第6步：加载训练好的模型生成图片。`python sample.py`。
+"""
+sample.py — 加载训练好的模型生成图片
 
 💡 可单独测试本文件：
     python sample.py
